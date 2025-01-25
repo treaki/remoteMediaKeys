@@ -17,6 +17,15 @@ def handle_media_key(key):
     elif key == 'previous':
         keyboard.press(keyboard.media_previous)
         keyboard.release(keyboard.media_previous)
+    elif key == 'volume_up':
+        keyboard.press(keyboard.media_volume_up)
+        keyboard.release(keyboard.media_volume_up)
+    elif key == 'volume_down':
+        keyboard.press(keyboard.media_volume_down)
+        keyboard.release(keyboard.media_volume_down)
+    elif key == 'volume_mute':
+        keyboard.press(keyboard.media_volume_mute)
+        keyboard.release(keyboard.media_volume_mute)
 
 # Function to get currently playing song (placeholder)
 def get_currently_playing_song():
@@ -31,11 +40,15 @@ def get_currently_playing_song():
 
 # Function to handle client connection
 def handle_client(client_socket):
+    # Send the server's hostname to the client
+    hostname = socket.gethostname()
+    client_socket.send(hostname.encode('utf-8'))
+
     while True:
         try:
             message = client_socket.recv(1024).decode('utf-8')
             if message:
-                if message in ['play_pause', 'next', 'previous']:
+                if message in ['play_pause', 'next', 'previous', 'volume_up', 'volume_down', 'volume_mute']:
                     handle_media_key(message)
                 elif message == 'get_song':
                     song = get_currently_playing_song()
