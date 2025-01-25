@@ -2,32 +2,23 @@
 
 import socket
 import threading
-from pynput.keyboard import Controller
+import subprocess
 import platform
 
-# Initialize keyboard controller
-keyboard = Controller()
-
-# Function to handle media keys
+# Function to handle media keys using xdotool
 def handle_media_key(key):
     if key == 'play_pause':
-        keyboard.press(keyboard.media_play_pause)
-        keyboard.release(keyboard.media_play_pause)
+        subprocess.run(['xdotool', 'key', 'XF86AudioPlay'])
     elif key == 'next':
-        keyboard.press(keyboard.media_next)
-        keyboard.release(keyboard.media_next)
+        subprocess.run(['xdotool', 'key', 'XF86AudioNext'])
     elif key == 'previous':
-        keyboard.press(keyboard.media_previous)
-        keyboard.release(keyboard.media_previous)
+        subprocess.run(['xdotool', 'key', 'XF86AudioPrev'])
     elif key == 'volume_up':
-        keyboard.press(keyboard.media_volume_up)
-        keyboard.release(keyboard.media_volume_up)
+        subprocess.run(['xdotool', 'key', 'XF86AudioRaiseVolume'])
     elif key == 'volume_down':
-        keyboard.press(keyboard.media_volume_down)
-        keyboard.release(keyboard.media_volume_down)
+        subprocess.run(['xdotool', 'key', 'XF86AudioLowerVolume'])
     elif key == 'volume_mute':
-        keyboard.press(keyboard.media_volume_mute)
-        keyboard.release(keyboard.media_volume_mute)
+        subprocess.run(['xdotool', 'key', 'XF86AudioMute'])
 
 # Function to get currently playing song (placeholder)
 def get_currently_playing_song():
