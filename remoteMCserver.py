@@ -40,19 +40,18 @@ def get_currently_playing_song():
 
 # Function to handle client connection
 def handle_client(client_socket):
-    # Send the server's hostname to the client
-    hostname = socket.gethostname()
-    client_socket.send(hostname.encode('utf-8'))
-
     while True:
         try:
             message = client_socket.recv(1024).decode('utf-8')
             if message:
                 if message in ['play_pause', 'next', 'previous', 'volume_up', 'volume_down', 'volume_mute']:
                     handle_media_key(message)
+                    client_socket.send(b'OK')
                 elif message == 'get_song':
                     song = get_currently_playing_song()
                     client_socket.send(song.encode('utf-8'))
+                elif message == 'exit':
+                    break
             else:
                 break
         except:
