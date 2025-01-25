@@ -1,4 +1,3 @@
-#git@github.com:treaki/remoteMediaKeys.git
 import socket
 import threading
 from pynput.keyboard import Controller
@@ -48,7 +47,7 @@ def handle_client(client_socket):
     client_socket.close()
 
 # Server setup
-def start_server(host='0.0.0.0', port=73381):
+def start_server(host='0.0.0.0', port=63342):
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind((host, port))
     server.listen(5)

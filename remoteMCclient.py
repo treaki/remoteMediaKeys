@@ -16,7 +16,7 @@ def get_currently_playing_song(host, port):
 
 if __name__ == "__main__":
     host = 'localhost'  # Change to the server's IP address
-    port = 73381
+    port = 63342
 
     # Send media key event
     send_media_key(host, port, 'play_pause')
