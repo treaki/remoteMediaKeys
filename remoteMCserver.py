@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import socket
 import threading
 from pynput.keyboard import Controller
@@ -40,6 +42,10 @@ def get_currently_playing_song():
 
 # Function to handle client connection
 def handle_client(client_socket):
+    # Send the server's hostname to the client
+    hostname = socket.gethostname()
+    client_socket.send(hostname.encode('utf-8'))
+
     while True:
         try:
             message = client_socket.recv(1024).decode('utf-8')
